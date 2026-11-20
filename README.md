@@ -2,6 +2,8 @@
 
 Redesigned, interactive single-page portfolio for **Taranpreet Kaur** (Digital Marketing Specialist — SEO, PPC, AEO, GEO, analytics).
 
+**Live:** https://taranpreet821.github.io/taranpreet-kaur/
+
 Built with plain HTML / CSS / vanilla JavaScript — no frameworks, fully deployable to GitHub Pages.
 
 ## Run locally
@@ -37,10 +39,9 @@ git init
 git add .
 git commit -m "Initial Taranpreet Kaur portfolio"
 git branch -M main
-gh repo create raahuldhiman-dev/tannu --public --clone=false
+gh repo create taranpreet821/taranpreet-kaur --public --clone=false
 git push -u origin main
-gh repo edit raahuldhiman-dev/tannu --source . --homepage https://raahuldhiman-dev.github.io/tannu/
-gh api repos/raahuldhiman-dev/tannu/pages -method POST -field "source[branch]=main" -field "source[path]=/"
+gh api repos/taranpreet821/taranpreet-kaur/pages -method POST -field "source[branch]=main" -field "source[path]=/"
 ```
 
 ### Option 2 — Inside an existing GitHub repository
@@ -49,6 +50,6 @@ Copy the contents of `tannu-portfolio/` into the repo root or the `/docs` folder
 
 ## Before going live
 
-- Replace `PORTFOLIO_EMAIL` in `assets/js/main.js` with the real professional email.
-- Replace the LinkedIn placeholder in the contact section with the real profile URL.
+- Email set: `taranpreet8219@gmail.com`
+- LinkedIn set: `https://www.linkedin.com/in/tannu82/`
 - Confirm client permissions and anonymise figures before publishing case studies.
