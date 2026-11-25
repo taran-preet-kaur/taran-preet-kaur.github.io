@@ -199,16 +199,20 @@ if (contactForm) {
   const submitBtn = contactForm.querySelector('button[type="submit"]');
   const setStatus = (text) => { if (sendStatus) sendStatus.textContent = text; };
 
+  const msgBox = $("#cf-message");
+  const charCount = $("#charCount");
+  const updateCount = () => { if (msgBox && charCount) charCount.textContent = `${msgBox.value.length} / ${msgBox.maxLength}`; };
+  if (msgBox) msgBox.addEventListener("input", updateCount);
+
   // Backup path: open the visitor's email app and show a copyable message.
-  const sendViaMailto = (name, email, message) => {
-    const subjectText = `Portfolio enquiry from ${name || "a visitor"}`;
+  const sendViaMailto = (subjectText, details) => {
     const subject = encodeURIComponent(subjectText);
-    const body = encodeURIComponent(`${name}\n${email}\n\n${message}`);
+    const body = encodeURIComponent(details);
     window.location.href = `mailto:${PORTFOLIO_EMAIL}?subject=${subject}&body=${body}`;
     const fallback = $("#formFallback");
     const fallbackText = $("#fallbackText");
     if (fallback && fallbackText) {
-      fallbackText.value = `To: ${PORTFOLIO_EMAIL}\nSubject: ${subjectText}\n\n${name}\n${email}\n\n${message}`;
+      fallbackText.value = `To: ${PORTFOLIO_EMAIL}\nSubject: ${subjectText}\n\n${details}`;
       fallback.hidden = false;
       $("#copyStatus").textContent = "";
     }
@@ -217,15 +221,25 @@ if (contactForm) {
   contactForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     const data = new FormData(contactForm);
-    const name = (data.get("name") || "").toString().trim();
-    const email = (data.get("email") || "").toString().trim();
-    const message = (data.get("message") || "").toString().trim();
+    const val = (k) => (data.get(k) || "").toString().trim();
+    const fields = {
+      name: val("name"), email: val("email"), phone: val("phone"), company: val("company"),
+      service: val("service"), budget: val("budget"), timeline: val("timeline"),
+      source: val("source"), message: val("message"),
+    };
+    const subjectText = `Portfolio enquiry: ${fields.service || "General"} - ${fields.name || "a visitor"}`;
+    const details = [
+      ["Name", fields.name], ["Email", fields.email], ["Phone", fields.phone],
+      ["Company / website", fields.company], ["Interested in", fields.service],
+      ["Monthly budget", fields.budget], ["Timeline", fields.timeline],
+      ["Heard about me via", fields.source],
+    ].filter(([, v]) => v).map(([k, v]) => `${k}: ${v}`).join("\n") + `\n\nMessage:\n${fields.message}`;
 
     // Bots fill the hidden honeypot field; silently drop those.
     if (data.get("botcheck")) return;
 
     // No Web3Forms key configured -> use the email-app method only.
-    if (!WEB3FORMS_KEY) { sendViaMailto(name, email, message); return; }
+    if (!WEB3FORMS_KEY) { sendViaMailto(subjectText, details); return; }
 
     submitBtn.disabled = true;
     setStatus("Sending…");
@@ -236,18 +250,21 @@ if (contactForm) {
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           access_key: WEB3FORMS_KEY,
-          subject: `Portfolio enquiry from ${name || "a visitor"}`,
+          subject: subjectText,
           from_name: "Portfolio contact form",
-          name, email, message,
+          replyto: fields.email,
+          ...fields,
+          consent: "Agreed to be contacted",
         }),
       });
       const result = await res.json();
       if (!res.ok || !result.success) throw new Error(result.message || "Request failed");
       contactForm.reset();
+      updateCount();
       setStatus("Thank you! Your message has been sent. I'll reply soon.");
     } catch (err) {
       setStatus("Couldn't send automatically. Please use the email option below.");
-      sendViaMailto(name, email, message);
+      sendViaMailto(subjectText, details);
     } finally {
       submitBtn.disabled = false;
     }

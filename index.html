@@ -407,9 +407,83 @@
             </div>
           </div>
           <form class="contact-form" id="contactForm">
-            <input type="text" name="name" placeholder="Your name" required>
-            <input type="email" name="email" placeholder="Your email" required>
-            <textarea name="message" placeholder="Tell me about your project, goals and timeline" required></textarea>
+            <div class="form-row">
+              <div class="field">
+                <label for="cf-name">Full name <span class="req" aria-hidden="true">*</span></label>
+                <input id="cf-name" type="text" name="name" placeholder="Your name" autocomplete="name" minlength="2" maxlength="80" required>
+              </div>
+              <div class="field">
+                <label for="cf-email">Email <span class="req" aria-hidden="true">*</span></label>
+                <input id="cf-email" type="email" name="email" placeholder="you@company.com" autocomplete="email" maxlength="120" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label for="cf-phone">Phone / WhatsApp <small>(optional)</small></label>
+                <input id="cf-phone" type="tel" name="phone" placeholder="+91 98765 43210" autocomplete="tel" pattern="[0-9+()\s\-]{7,20}" title="Digits, spaces, + ( ) and - only (7-20 characters)" maxlength="20">
+              </div>
+              <div class="field">
+                <label for="cf-company">Company / website <small>(optional)</small></label>
+                <input id="cf-company" type="text" name="company" placeholder="Company name or URL" autocomplete="organization" maxlength="120">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label for="cf-service">I&rsquo;m interested in <span class="req" aria-hidden="true">*</span></label>
+                <select id="cf-service" name="service" required>
+                  <option value="" selected disabled>Select a service</option>
+                  <option>SEO (technical, on-page, audits)</option>
+                  <option>Google Ads / PPC</option>
+                  <option>Meta &amp; paid social</option>
+                  <option>Analytics &amp; conversion tracking</option>
+                  <option>Online reputation management</option>
+                  <option>AI-search / GEO visibility</option>
+                  <option>Full-time role / hiring enquiry</option>
+                  <option>Something else</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="cf-budget">Monthly budget <small>(optional)</small></label>
+                <select id="cf-budget" name="budget">
+                  <option value="" selected>Prefer not to say</option>
+                  <option>Under &#8377;25,000</option>
+                  <option>&#8377;25,000 &ndash; &#8377;75,000</option>
+                  <option>&#8377;75,000 &ndash; &#8377;2,00,000</option>
+                  <option>&#8377;2,00,000+</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label for="cf-timeline">Timeline <small>(optional)</small></label>
+                <select id="cf-timeline" name="timeline">
+                  <option value="" selected>Not sure yet</option>
+                  <option>As soon as possible</option>
+                  <option>Within a month</option>
+                  <option>1&ndash;3 months</option>
+                  <option>Just exploring</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="cf-source">How did you find me? <small>(optional)</small></label>
+                <select id="cf-source" name="source">
+                  <option value="" selected>Select</option>
+                  <option>LinkedIn</option>
+                  <option>Google search</option>
+                  <option>Referral</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="cf-message">Project details <span class="req" aria-hidden="true">*</span></label>
+              <textarea id="cf-message" name="message" placeholder="Tell me about your project, goals and timeline" minlength="20" maxlength="2000" required></textarea>
+              <small class="char-count" id="charCount" aria-live="off">0 / 2000</small>
+            </div>
+            <label class="consent">
+              <input type="checkbox" name="consent" required>
+              <span>I agree that my details may be used to reply to this enquiry. <span class="req" aria-hidden="true">*</span></span>
+            </label>
             <input type="text" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
             <button class="btn" type="submit">Send message</button>
             <p class="send-status" id="sendStatus" role="status" aria-live="polite"></p>
