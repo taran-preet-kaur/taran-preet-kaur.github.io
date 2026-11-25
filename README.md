@@ -1,8 +1,8 @@
-# Taranpreet Kaur — Digital Marketing Portfolio
+﻿# Taranpreet Kaur — Digital Marketing Portfolio
 
 Redesigned, interactive single-page portfolio for **Taranpreet Kaur** (Digital Marketing Specialist — SEO, PPC, AEO, GEO, analytics).
 
-**Live:** https://taranpreet821.github.io/taranpreet-kaur/
+**Live:** https://taran-preet-kaur.github.io/
 
 Built with plain HTML / CSS / vanilla JavaScript — no frameworks, fully deployable to GitHub Pages.
 
