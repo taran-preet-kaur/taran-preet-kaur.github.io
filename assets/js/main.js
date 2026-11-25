@@ -6,6 +6,8 @@
    ============================================================ */
 
 const PORTFOLIO_EMAIL = "taranpreet8219@gmail.com"; // TODO: replace with your professional email
+// Public Web3Forms access key (safe to keep in client code). Get one at https://web3forms.com
+const WEB3FORMS_KEY = "";
 
 const $ = (selector, scope) => (scope || document).querySelector(selector);
 const $$ = (selector, scope) => Array.from((scope || document).querySelectorAll(selector));
@@ -193,23 +195,61 @@ caseTabs.forEach((tab) => {
 /* ---------- Contact form -> mailto ---------- */
 const contactForm = $("#contactForm");
 if (contactForm) {
-  contactForm.addEventListener("submit", (event) => {
+  const sendStatus = $("#sendStatus");
+  const submitBtn = contactForm.querySelector('button[type="submit"]');
+  const setStatus = (text) => { if (sendStatus) sendStatus.textContent = text; };
+
+  // Backup path: open the visitor's email app and show a copyable message.
+  const sendViaMailto = (name, email, message) => {
+    const subjectText = `Portfolio enquiry from ${name || "a visitor"}`;
+    const subject = encodeURIComponent(subjectText);
+    const body = encodeURIComponent(`${name}\n${email}\n\n${message}`);
+    window.location.href = `mailto:${PORTFOLIO_EMAIL}?subject=${subject}&body=${body}`;
+    const fallback = $("#formFallback");
+    const fallbackText = $("#fallbackText");
+    if (fallback && fallbackText) {
+      fallbackText.value = `To: ${PORTFOLIO_EMAIL}\nSubject: ${subjectText}\n\n${name}\n${email}\n\n${message}`;
+      fallback.hidden = false;
+      $("#copyStatus").textContent = "";
+    }
+  };
+
+  contactForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     const data = new FormData(contactForm);
     const name = (data.get("name") || "").toString().trim();
     const email = (data.get("email") || "").toString().trim();
     const message = (data.get("message") || "").toString().trim();
-    const subject = encodeURIComponent(`Portfolio enquiry from ${name || "a visitor"}`);
-    const body = encodeURIComponent(`${name}\n${email}\n\n${message}`);
-    window.location.href = `mailto:${PORTFOLIO_EMAIL}?subject=${subject}&body=${body}`;
 
-    // Fallback for visitors with no email app: show the message so they can copy it.
-    const fallback = $("#formFallback");
-    const fallbackText = $("#fallbackText");
-    if (fallback && fallbackText) {
-      fallbackText.value = `To: ${PORTFOLIO_EMAIL}\nSubject: Portfolio enquiry from ${name || "a visitor"}\n\n${name}\n${email}\n\n${message}`;
-      fallback.hidden = false;
-      $("#copyStatus").textContent = "";
+    // Bots fill the hidden honeypot field; silently drop those.
+    if (data.get("botcheck")) return;
+
+    // No Web3Forms key configured -> use the email-app method only.
+    if (!WEB3FORMS_KEY) { sendViaMailto(name, email, message); return; }
+
+    submitBtn.disabled = true;
+    setStatus("Sending…");
+    $("#formFallback").hidden = true;
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: `Portfolio enquiry from ${name || "a visitor"}`,
+          from_name: "Portfolio contact form",
+          name, email, message,
+        }),
+      });
+      const result = await res.json();
+      if (!res.ok || !result.success) throw new Error(result.message || "Request failed");
+      contactForm.reset();
+      setStatus("Thank you! Your message has been sent. I'll reply soon.");
+    } catch (err) {
+      setStatus("Couldn't send automatically. Please use the email option below.");
+      sendViaMailto(name, email, message);
+    } finally {
+      submitBtn.disabled = false;
     }
   });
 
