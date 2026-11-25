@@ -12,8 +12,54 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    // Apply the saved/system theme before first paint to avoid a flash.
+    (function () {
+      try {
+        var m = localStorage.getItem("tannu-theme") || "system";
+        var dark = m === "dark" || (m === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+        document.documentElement.setAttribute("data-mode", m);
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+      <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+      <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+      <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+      <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></symbol>
+      <symbol id="i-folder" viewBox="0 0 24 24"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9L9.6 3.9A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2z"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+      <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+      <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 14 4-4 4 4 5-6"/></symbol>
+      <symbol id="i-flag" viewBox="0 0 24 24"><path d="M4 22V4"/><path d="M4 4h13l-2 4 2 4H4"/></symbol>
+      <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
+      <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+      <symbol id="i-trend" viewBox="0 0 24 24"><path d="m22 7-8.5 8.5-5-5L2 17"/><path d="M16 7h6v6"/></symbol>
+      <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></symbol>
+      <symbol id="i-click" viewBox="0 0 24 24"><path d="m9 9 5 12 1.8-5.2L21 14z"/><path d="M7.2 2.2 8 5M5.1 5.1 2.2 7.2M14 4.1 12 6M6 12l-1.9 2"/></symbol>
+      <symbol id="i-graduation" viewBox="0 0 24 24"><path d="m22 10-10-5L2 10l10 5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></symbol>
+      <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+      <symbol id="i-building" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/></symbol>
+      <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M20 7H5a2 2 0 0 1 0-4h13v4z"/><path d="M3 5v14a2 2 0 0 0 2 2h15V7"/><circle cx="16" cy="14" r="1"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+      <symbol id="i-message" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+      <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
+    </defs>
+  </svg>
 
   <div class="scroll-progress" aria-hidden="true">
     <div class="scroll-progress-bar" id="scrollProgressBar"></div>
@@ -29,13 +75,16 @@
         <a href="#case-studies">Case Studies</a>
         <a href="#projects">Projects</a>
         <a href="#approach">Approach</a>
+        <a href="#toolkit">Toolkit</a>
         <a href="#contact">Contact</a>
       </nav>
       <div class="nav-actions">
-        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
-          <svg id="iconSun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
-          <svg id="iconMoon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
-        </button>
+        <a class="nav-cta" href="#contact">Let&rsquo;s talk</a>
+        <div class="theme-switch" id="themeSwitch" role="radiogroup" aria-label="Colour theme">
+          <button type="button" role="radio" aria-checked="false" data-mode="light" aria-label="Light mode" title="Light"><svg class="ico"><use href="#i-sun"/></svg></button>
+          <button type="button" role="radio" aria-checked="false" data-mode="system" aria-label="Match system theme" title="System"><svg class="ico"><use href="#i-monitor"/></svg></button>
+          <button type="button" role="radio" aria-checked="false" data-mode="dark" aria-label="Dark mode" title="Dark"><svg class="ico"><use href="#i-moon"/></svg></button>
+        </div>
         <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
           <span></span>
           <span></span>
@@ -49,35 +98,78 @@
     <div class="hero-glow hero-glow-2" aria-hidden="true"></div>
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <div class="kicker reveal">Digital Marketing Portfolio &middot; 2026</div>
+        <div class="kicker reveal">Digital Marketing Portfolio &middot; <span data-current-year>2026</span></div>
         <h1 class="reveal" style="--d: 0.05s;">Taranpreet<br>Kaur<span class="accent">.</span></h1>
         <div class="role-line reveal" style="--d: 0.12s;"><span class="typed" id="typed">Digital Marketing Specialist</span></div>
         <p class="hero-p reveal" style="--d: 0.18s;">Turning search visibility, paid media data and customer intent into clearer growth opportunities.</p>
         <div class="actions reveal" style="--d: 0.24s;">
-          <a class="btn" href="#case-studies">Explore case studies</a>
-          <a class="btn btn-ghost" href="#contact">Get in touch</a>
+          <a class="btn" href="#case-studies">Explore case studies <svg class="ico"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-ghost" href="#contact"><svg class="ico"><use href="#i-mail"/></svg> Get in touch</a>
         </div>
       </div>
-      <aside class="hero-card reveal" style="--d: 0.2s;">
-        <div class="eyebrow">Core focus</div>
-        <p class="hero-card-text">Search visibility.<br>Paid performance.<br>Meaningful measurement.</p>
-        <strong>SEO + PPC</strong>
-        <span>with AEO, GEO &amp; analytics</span>
+      <aside class="hero-card dash reveal" id="heroDash" style="--d: 0.2s;" aria-label="Reported highlights from case studies">
+        <div class="dash-head">
+          <span class="eyebrow">Reported highlights</span>
+          <span class="live"><i></i>From my case studies</span>
+        </div>
+        <div class="dash-tabs" role="tablist" aria-label="Choose a metric">
+          <button class="dash-tab active" type="button" role="tab" aria-selected="true" data-kpi="roas">ROAS</button>
+          <button class="dash-tab" type="button" role="tab" aria-selected="false" data-kpi="cpa">CPA</button>
+          <button class="dash-tab" type="button" role="tab" aria-selected="false" data-kpi="conv">Conversions</button>
+        </div>
+        <div class="dash-value">
+          <strong id="dashValue">6.55x</strong>
+          <span id="dashDelta" class="delta up">&#9650; from 4.67x</span>
+        </div>
+        <div class="dash-label" id="dashLabel">A2A &middot; Google Ads, Oct vs Sep</div>
+        <svg class="spark" id="spark" viewBox="0 0 300 96" role="img" aria-label="Before and after trend">
+          <defs>
+            <linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#9d7bff" stop-opacity="0.45"/>
+              <stop offset="1" stop-color="#9d7bff" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <path id="sparkArea" fill="url(#sparkFill)" d=""/>
+          <path id="sparkLine" fill="none" stroke="#c4b5fd" stroke-width="3" stroke-linecap="round" d=""/>
+          <circle id="sparkA" r="5" fill="#0e1830" stroke="#c4b5fd" stroke-width="2.5"/>
+          <circle id="sparkB" r="6" fill="#34d399" stroke="#0e1830" stroke-width="2.5"/>
+        </svg>
+        <div class="spark-axis"><span id="sparkFrom">Before</span><span id="sparkTo">After</span></div>
+        <div class="dash-foot">SEO + PPC <span>with AEO, GEO &amp; analytics</span></div>
       </aside>
     </div>
   </header>
 
+  <div class="marquee" aria-label="Tools and platforms">
+    <div class="marquee-track">
+      <div class="marquee-set">
+        <span>Google Ads</span><span>GA4</span><span>Google Tag Manager</span><span>Search Console</span><span>Meta Ads</span><span>SEMrush</span><span>Ahrefs</span><span>Search Atlas</span><span>Microsoft Clarity</span><span>Shopify</span><span>ClickUp</span><span>AgencyAnalytics</span>
+      </div>
+      <div class="marquee-set" aria-hidden="true">
+        <span>Google Ads</span><span>GA4</span><span>Google Tag Manager</span><span>Search Console</span><span>Meta Ads</span><span>SEMrush</span><span>Ahrefs</span><span>Search Atlas</span><span>Microsoft Clarity</span><span>Shopify</span><span>ClickUp</span><span>AgencyAnalytics</span>
+      </div>
+    </div>
+  </div>
+
   <section class="stats" id="stats" aria-label="Portfolio snapshot">
     <div class="wrap stats-grid">
       <div class="stat reveal">
+        <div class="stat-icon"><svg class="ico"><use href="#i-calendar"/></svg></div>
+        <div class="stat-num"><span data-years-since="2021-07-01" data-suffix="+">0</span></div>
+        <div class="stat-label">Years in digital marketing</div>
+      </div>
+      <div class="stat reveal" style="--d: 0.04s;">
+        <div class="stat-icon"><svg class="ico"><use href="#i-briefcase"/></svg></div>
         <div class="stat-num"><span data-count="6">0</span></div>
         <div class="stat-label">Case studies</div>
       </div>
       <div class="stat reveal" style="--d: 0.08s;">
+        <div class="stat-icon"><svg class="ico"><use href="#i-layers"/></svg></div>
         <div class="stat-num"><span data-count="5">0</span></div>
         <div class="stat-label">Expertise areas</div>
       </div>
       <div class="stat reveal" style="--d: 0.16s;">
+        <div class="stat-icon"><svg class="ico"><use href="#i-folder"/></svg></div>
         <div class="stat-num"><span data-count="6">0</span></div>
         <div class="stat-label">Projects</div>
       </div>
@@ -93,8 +185,11 @@
           <p class="lead">Digital marketing professional with experience across SEO, online reputation management, Google Ads, paid social, analytics and AI-search optimisation. My work combines practical campaign execution with structured audits, conversion-tracking checks, performance reporting and cross-team coordination. I focus on understanding the business objective first, validating the data, and making measured recommendations rather than changing accounts without approval.</p>
         </div>
         <div class="about-box reveal">
-          <b>Education</b>
-          <p>B.Sc. Non-Medical | Mata Gujri College, Sirhind | Graduated 2020</p>
+          <div class="about-icon"><svg class="ico"><use href="#i-graduation"/></svg></div>
+          <div>
+            <b>Education</b>
+            <p>B.Sc. Non-Medical | Mata Gujri College, Sirhind | Graduated 2020</p>
+          </div>
         </div>
       </div>
     </section>
@@ -107,22 +202,27 @@
         </div>
         <div class="grid">
           <div class="card skill reveal">
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg></div>
             <h3>Paid Media</h3>
             <p>Google Ads, Search, Shopping, Performance Max, Meta Ads, campaign structure, bidding and budget monitoring</p>
           </div>
           <div class="card skill reveal" style="--d: 0.06s;">
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="M8 12l2 2 4-4"/></svg></div>
             <h3>SEO</h3>
             <p>Technical SEO, on-page optimisation, keyword research, indexing checks, content opportunities and backlink audits</p>
           </div>
           <div class="card skill reveal">
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg></div>
             <h3>AEO &amp; GEO</h3>
             <p>AI-search visibility research, answer-focused content opportunities, entity signals and citation/mention analysis</p>
           </div>
           <div class="card skill reveal" style="--d: 0.06s;">
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/></svg></div>
             <h3>Analytics &amp; Tracking</h3>
             <p>GA4, Google Tag Manager, Search Console, UTMs, conversion actions, Meta Pixel and attribution checks</p>
           </div>
           <div class="card skill reveal">
+            <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/></svg></div>
             <h3>Reporting &amp; Leadership</h3>
             <p>Performance analysis, client updates, audit documentation, task coordination and team collaboration</p>
           </div>
@@ -140,6 +240,27 @@
           <span class="tool">Shopify</span>
           <span class="tool">ClickUp</span>
           <span class="tool">AgencyAnalytics</span>
+        </div>
+
+        <div class="funnel-wrap reveal">
+          <div class="funnel-head">
+            <div class="overline">Full-funnel view</div>
+            <h3>Where my work sits in the customer journey</h3>
+            <p class="small-note">Tap a stage to see the channels and tools I use there.</p>
+          </div>
+          <div class="funnel">
+            <div class="funnel-stages" role="tablist" aria-label="Funnel stages">
+              <button class="f-stage active" type="button" role="tab" aria-selected="true" data-stage="attract" style="--w: 100%"><svg class="ico"><use href="#i-search"/></svg><b>Attract</b><small>Be found</small></button>
+              <button class="f-stage" type="button" role="tab" aria-selected="false" data-stage="engage" style="--w: 82%"><svg class="ico"><use href="#i-click"/></svg><b>Engage</b><small>Earn the click</small></button>
+              <button class="f-stage" type="button" role="tab" aria-selected="false" data-stage="convert" style="--w: 64%"><svg class="ico"><use href="#i-target"/></svg><b>Convert</b><small>Drive the action</small></button>
+              <button class="f-stage" type="button" role="tab" aria-selected="false" data-stage="measure" style="--w: 46%"><svg class="ico"><use href="#i-chart"/></svg><b>Measure</b><small>Prove &amp; improve</small></button>
+            </div>
+            <div class="funnel-detail" id="funnelDetail" aria-live="polite">
+              <h4 id="fdTitle">Attract</h4>
+              <p id="fdText"></p>
+              <div class="f-tags" id="fdTags"></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -209,6 +330,11 @@
               <div class="metric"><span>Conversions</span><strong>51.99 &rarr; 47.97</strong></div>
               <div class="metric"><span>ROAS</span><strong>4.67x &rarr; 6.55x</strong></div>
             </div>
+            <div class="compare" aria-label="September versus October comparison">
+              <div class="cmp" data-label="ROAS" data-from="4.67" data-to="6.55" data-suffix="x" data-from-label="Sep" data-to-label="Oct" data-good="up"></div>
+              <div class="cmp" data-label="Google Ads spend" data-from="983.90" data-to="689.90" data-prefix="A$" data-from-label="Sep" data-to-label="Oct" data-good="neutral"></div>
+              <div class="cmp" data-label="Conversion value" data-from="4599.62" data-to="4519.23" data-prefix="A$" data-from-label="Sep" data-to-label="Oct" data-good="neutral"></div>
+            </div>
             <p class="context"><b>Context:</b> October delivered higher reported ROAS with lower spend, while conversion volume and conversion value were slightly lower. This is an analysis of the supplied account figures, not a claim that one isolated change caused the movement.</p>
           </article>
 
@@ -252,6 +378,10 @@
               <div class="metric"><span>CPA movement noted</span><strong>A$50 &rarr; A$34</strong></div>
               <div class="metric"><span>Reported snapshot</span><strong>A$273.05 spend / A$2,103.22 value</strong></div>
               <div class="metric"><span>Calculated ROAS</span><strong>7.70x</strong></div>
+            </div>
+            <div class="compare" aria-label="June versus July comparison">
+              <div class="cmp" data-label="Conversions" data-from="54" data-to="106" data-from-label="Jun" data-to-label="Jul" data-good="up"></div>
+              <div class="cmp" data-label="CPA (lower is better)" data-from="50" data-to="34" data-prefix="A$" data-from-label="Jun" data-to-label="Jul" data-good="down"></div>
             </div>
             <p class="context"><b>Context:</b> The CPA movement and the later spend/value snapshot were recorded in separate working updates. They are shown as separate reported observations, not as one continuous experiment.</p>
           </article>
@@ -328,26 +458,32 @@
         </div>
         <div class="projects">
           <div class="project reveal">
+            <i class="project-icon"><svg class="ico"><use href="#i-chart"/></svg></i>
             <b>Sydney Blinds &amp; Co</b>
             <span>PPC performance monitoring, SEO audit observations and UTM/tracking checks.</span>
           </div>
           <div class="project reveal" style="--d: 0.05s;">
+            <i class="project-icon"><svg class="ico"><use href="#i-target"/></svg></i>
             <b>Cleary &amp; Co</b>
             <span>Google Ads strategy review, property-owner versus guest intent and lead-generation considerations.</span>
           </div>
           <div class="project reveal">
+            <i class="project-icon"><svg class="ico"><use href="#i-cart"/></svg></i>
             <b>ValuHub</b>
             <span>GA4, Merchant Center and e-commerce tracking requirements review.</span>
           </div>
           <div class="project reveal" style="--d: 0.05s;">
+            <i class="project-icon"><svg class="ico"><use href="#i-trend"/></svg></i>
             <b>Mandarin &amp; Genconnect</b>
             <span>Campaign performance checks, conversion analysis and budget/bid-strategy context.</span>
           </div>
           <div class="project reveal">
+            <i class="project-icon"><svg class="ico"><use href="#i-search"/></svg></i>
             <b>AuremBlack</b>
             <span>Shopify SEO foundations, metadata, headings, image alt text and tracking-related work.</span>
           </div>
           <div class="project reveal" style="--d: 0.05s;">
+            <i class="project-icon"><svg class="ico"><use href="#i-share"/></svg></i>
             <b>Qudrat Digital</b>
             <span>Social media content and organic audience-growth work.</span>
           </div>
@@ -363,24 +499,70 @@
         </div>
         <div class="process">
           <div class="step reveal">
+            <div class="step-icon"><svg class="ico"><use href="#i-target"/></svg></div>
             <b>01 / UNDERSTAND</b>
             <p>Clarify the business goal and conversion intent.</p>
           </div>
           <div class="step reveal" style="--d: 0.05s;">
+            <div class="step-icon"><svg class="ico"><use href="#i-shield"/></svg></div>
             <b>02 / VALIDATE</b>
             <p>Check tracking, attribution and data quality.</p>
           </div>
           <div class="step reveal">
+            <div class="step-icon"><svg class="ico"><use href="#i-chart"/></svg></div>
             <b>03 / ANALYSE</b>
             <p>Compare relevant periods and channel signals.</p>
           </div>
           <div class="step reveal" style="--d: 0.05s;">
+            <div class="step-icon"><svg class="ico"><use href="#i-flag"/></svg></div>
             <b>04 / PRIORITISE</b>
             <p>Recommend practical, impact-led actions.</p>
           </div>
           <div class="step reveal">
+            <div class="step-icon"><svg class="ico"><use href="#i-users"/></svg></div>
             <b>05 / COLLABORATE</b>
             <p>Document work and align before implementation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="toolkit" class="alt">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="overline">Interactive / Toolkit</div>
+          <h2>Campaign metrics calculator</h2>
+          <p class="lead">The quick maths I run on every account. Change the numbers and see ROAS, CPA, CPC, CTR and conversion rate update live. The starting values are illustrative, not client data.</p>
+        </div>
+        <div class="calc card reveal">
+          <div class="calc-inputs">
+            <div class="calc-cur">
+              <label for="calcCur">Currency</label>
+              <select id="calcCur">
+                <option value="&#8377;">&#8377; INR</option>
+                <option value="A$">A$ AUD</option>
+                <option value="$">$ USD</option>
+                <option value="&pound;">&pound; GBP</option>
+              </select>
+            </div>
+            <div class="calc-field"><label for="cSpend">Ad spend</label><input id="cSpend" type="number" min="0" step="any" value="50000" inputmode="decimal"></div>
+            <div class="calc-field"><label for="cRevenue">Revenue / conversion value</label><input id="cRevenue" type="number" min="0" step="any" value="200000" inputmode="decimal"></div>
+            <div class="calc-field"><label for="cImpr">Impressions</label><input id="cImpr" type="number" min="0" step="any" value="400000" inputmode="numeric"></div>
+            <div class="calc-field"><label for="cClicks">Clicks</label><input id="cClicks" type="number" min="0" step="any" value="8000" inputmode="numeric"></div>
+            <div class="calc-field"><label for="cConv">Conversions</label><input id="cConv" type="number" min="0" step="any" value="250" inputmode="numeric"></div>
+            <button class="btn btn-outline" type="button" id="calcReset">Reset</button>
+          </div>
+          <div class="calc-results" aria-live="polite">
+            <div class="res res-main"><span>ROAS</span><strong id="rRoas">&ndash;</strong><small id="rRoasNote"></small></div>
+            <div class="res"><span>CPA</span><strong id="rCpa">&ndash;</strong><small>Cost per conversion</small></div>
+            <div class="res"><span>CPC</span><strong id="rCpc">&ndash;</strong><small>Cost per click</small></div>
+            <div class="res"><span>CTR</span><strong id="rCtr">&ndash;</strong><small>Clicks &divide; impressions</small></div>
+            <div class="res"><span>Conv. rate</span><strong id="rCvr">&ndash;</strong><small>Conversions &divide; clicks</small></div>
+            <div class="res"><span>Value / conv.</span><strong id="rAov">&ndash;</strong><small>Average order value</small></div>
+            <div class="spend-bar" aria-hidden="true">
+              <div class="sb-label"><span>Spend</span><span>Revenue</span></div>
+              <div class="sb-track"><div class="sb-spend" id="sbSpend"></div><div class="sb-rev" id="sbRev"></div></div>
+            </div>
           </div>
         </div>
       </div>
@@ -389,22 +571,34 @@
     <section id="contact">
       <div class="wrap">
         <div class="contact reveal">
+          <div class="contact-info">
           <div class="overline">07 / Let&rsquo;s connect</div>
           <h2>Have a project in mind?</h2>
           <p>Interested in SEO, PPC, analytics or AI-search visibility projects? I&rsquo;d be happy to discuss how I can contribute.</p>
           <div class="contact-details">
             <div class="contact-detail">
-              <span>Email</span>
-              <b>taranpreet8219@gmail.com</b>
+              <i class="cd-icon"><svg class="ico"><use href="#i-mail"/></svg></i>
+              <div class="cd-text">
+                <span>Email</span>
+                <b>taranpreet8219@gmail.com</b>
+              </div>
+              <button class="copy-email" type="button" id="copyEmail" aria-label="Copy email address"><svg class="ico"><use href="#i-copy"/></svg> Copy</button>
             </div>
             <div class="contact-detail">
-              <span>LinkedIn</span>
-              <b><a href="https://www.linkedin.com/in/tannu82/" target="_blank" rel="noopener">tannu82</a></b>
+              <i class="cd-icon"><svg class="ico"><use href="#i-linkedin"/></svg></i>
+              <div class="cd-text">
+                <span>LinkedIn</span>
+                <b><a href="https://www.linkedin.com/in/tannu82/" target="_blank" rel="noopener">tannu82</a></b>
+              </div>
             </div>
             <div class="contact-detail">
-              <span>Location</span>
-              <b>India</b>
+              <i class="cd-icon"><svg class="ico"><use href="#i-pin"/></svg></i>
+              <div class="cd-text">
+                <span>Location</span>
+                <b>India</b>
+              </div>
             </div>
+          </div>
           </div>
           <form class="contact-form" id="contactForm">
             <div class="form-row">
@@ -485,7 +679,7 @@
               <span>I agree that my details may be used to reply to this enquiry. <span class="req" aria-hidden="true">*</span></span>
             </label>
             <input type="text" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0">
-            <button class="btn" type="submit">Send message</button>
+            <button class="btn btn-send" type="submit"><svg class="ico"><use href="#i-send"/></svg> Send message</button>
             <p class="send-status" id="sendStatus" role="status" aria-live="polite"></p>
             <div class="form-fallback" id="formFallback" hidden role="status">
               <p>If your email app didn't open, copy your message and email it to <b>taranpreet8219@gmail.com</b>.</p>
@@ -510,6 +704,8 @@
   <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"></path></svg>
   </button>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="assets/js/main.js"></script>
 </body>
