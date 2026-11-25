@@ -202,7 +202,31 @@ if (contactForm) {
     const subject = encodeURIComponent(`Portfolio enquiry from ${name || "a visitor"}`);
     const body = encodeURIComponent(`${name}\n${email}\n\n${message}`);
     window.location.href = `mailto:${PORTFOLIO_EMAIL}?subject=${subject}&body=${body}`;
+
+    // Fallback for visitors with no email app: show the message so they can copy it.
+    const fallback = $("#formFallback");
+    const fallbackText = $("#fallbackText");
+    if (fallback && fallbackText) {
+      fallbackText.value = `To: ${PORTFOLIO_EMAIL}\nSubject: Portfolio enquiry from ${name || "a visitor"}\n\n${name}\n${email}\n\n${message}`;
+      fallback.hidden = false;
+      $("#copyStatus").textContent = "";
+    }
   });
+
+  const copyBtn = $("#copyMessage");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", async () => {
+      const fallbackText = $("#fallbackText");
+      const status = $("#copyStatus");
+      try {
+        await navigator.clipboard.writeText(fallbackText.value);
+        status.textContent = "Copied!";
+      } catch (err) {
+        fallbackText.select();
+        status.textContent = "Press Ctrl+C to copy.";
+      }
+    });
+  }
 }
 
 /* ---------- Footer year ---------- */

@@ -264,6 +264,12 @@ h3 { color: var(--heading); }
 .contact-form textarea { min-height: 130px; resize: vertical; }
 .contact-form input:focus, .contact-form textarea:focus { outline: 2px solid var(--purple); border-color: transparent; }
 .form-note { font-size: 12px; color: #aeb9d0; margin: 0; }
+.form-fallback { display: grid; gap: 10px; padding: 14px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(255, 255, 255, 0.06); }
+.form-fallback[hidden] { display: none; }
+.form-fallback p { margin: 0; font-size: 13px; color: #d8deeb; }
+.form-fallback textarea { min-height: 110px; }
+.form-fallback .btn { justify-self: start; }
+.copy-status { font-size: 12px; color: #d8deeb; }
 
 /* ---------- Footer ---------- */
 footer { padding: 30px 0 44px; color: var(--muted); font-size: 12px; }

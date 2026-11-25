@@ -411,6 +411,12 @@
             <input type="email" name="email" placeholder="Your email" required>
             <textarea name="message" placeholder="Tell me about your project, goals and timeline" required></textarea>
             <button class="btn" type="submit">Send message</button>
+            <div class="form-fallback" id="formFallback" hidden role="status">
+              <p>If your email app didn't open, copy your message and email it to <b>taranpreet8219@gmail.com</b>.</p>
+              <textarea id="fallbackText" readonly rows="5" aria-label="Your message"></textarea>
+              <button class="btn" type="button" id="copyMessage">Copy message</button>
+              <span class="copy-status" id="copyStatus" aria-live="polite"></span>
+            </div>
             <p class="form-note">This opens your email client to send the message. Prefer email? Reach out directly at taranpreet8219@gmail.com.</p>
           </form>
         </div>
