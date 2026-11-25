@@ -1,4 +1,4 @@
-﻿# Taranpreet Kaur — Digital Marketing Portfolio
+# Taranpreet Kaur — Digital Marketing Portfolio
 
 Redesigned, interactive single-page portfolio for **Taranpreet Kaur** (Digital Marketing Specialist — SEO, PPC, AEO, GEO, analytics).
 
