@@ -7,7 +7,7 @@
 
 const PORTFOLIO_EMAIL = "taranpreet8219@gmail.com"; // TODO: replace with your professional email
 // Public Web3Forms access key (safe to keep in client code). Get one at https://web3forms.com
-const WEB3FORMS_KEY = "";
+const WEB3FORMS_KEY = "4352d5f7-4ea4-43a9-bbc6-3ea3b1f8d9bf";
 
 const $ = (selector, scope) => (scope || document).querySelector(selector);
 const $$ = (selector, scope) => Array.from((scope || document).querySelectorAll(selector));
